@@ -1,0 +1,271 @@
+@import "tailwindcss";
+
+/*
+  Identidade "retro-diner editorial" do John's Burgers.
+  Os tokens são semânticos de propósito: trocar os hexadecimais abaixo
+  retematiza a casa inteira sem tocar em nenhum componente.
+*/
+@theme {
+  --color-marca: #b7332a;
+  --color-marca-escura: #8c221b;
+  --color-marca-tinta: #5e1610;
+
+  --color-superficie: #f5e9d7;
+  --color-superficie-alta: #fcf6ec;
+  --color-superficie-borda: #eadbc0;
+
+  --color-tinta: #2a1810;
+  --color-tinta-suave: #5b4034;
+
+  --color-destaque: #e9a73c;
+  --color-positivo: #5c7a3f;
+
+  /*
+    Cor de terceiro, não da casa: é a identidade do WhatsApp e só pode ser usada
+    onde o destino é o WhatsApp. Não entra na retematização da hamburgueria.
+  */
+  --color-whatsapp: #25d366;
+  --color-whatsapp-tinta: #0b2e17;
+
+  --font-display: var(--fonte-display), "Arial Narrow", Impact, sans-serif;
+  --font-sans: var(--fonte-corpo), "Helvetica Neue", Arial, sans-serif;
+  --font-etiqueta: var(--fonte-etiqueta), Georgia, serif;
+
+  /* sombra sólida deslocada — o traço gráfico da identidade, nunca desfoque */
+  --shadow-bloco: 10px 10px 0 var(--color-marca-tinta);
+  --shadow-bloco-sm: 6px 6px 0 var(--color-marca-tinta);
+  --shadow-relevo: 6px 6px 0 rgb(94 22 16 / 0.16);
+  --shadow-relevo-alto: 9px 9px 0 rgb(94 22 16 / 0.22);
+  --shadow-botao: 4px 4px 0 var(--color-marca-tinta);
+  /*
+    Única exceção ao offset sólido: o que flutua sobre o conteúdo precisa de
+    desfoque para ler como camada acima da página, não como recorte colado.
+  */
+  --shadow-flutuante: 0 6px 18px rgb(40 6 3 / 0.45);
+  --shadow-flutuante-alto: 0 10px 22px rgb(40 6 3 / 0.5);
+  --shadow-painel: -14px 0 40px rgb(30 4 2 / 0.45);
+  --shadow-botao-alto: 6px 6px 0 var(--color-marca-tinta);
+  --shadow-etiqueta: 3px 3px 0 var(--color-marca-tinta);
+
+  /* recorte das fotos sobre o vermelho — sombra na própria tinta da marca */
+  --drop-shadow-prato: 0 10px 14px rgb(94 22 16 / 0.35);
+  --drop-shadow-hero: 0 26px 22px rgb(50 8 4 / 0.5);
+  --drop-shadow-hero-perto: 0 5px 9px rgb(50 8 4 / 0.32);
+
+  --container-pagina: 1180px;
+  --container-painel: 24rem;
+
+  --text-miudo: 0.72rem;
+  --text-miudo--line-height: 1.4;
+  --text-apoio: 1.0625rem;
+  --text-apoio--line-height: 1.65;
+
+  --tracking-chapeu: 0.18em;
+  --tracking-rotulo: 0.13em;
+  --tracking-controle: 0.1em;
+
+  --radius-aresta: 2px;
+  --radius-etiqueta: 3px;
+  --radius-bloco: 4px;
+
+  --animate-faixa: faixa 26s linear infinite;
+
+  /*
+    Vida em volta do produto: amplitudes pequenas e tempos longos e diferentes
+    entre si, para nada pulsar em sincronia — o que denunciaria a animação.
+  */
+  --animate-flutuar: flutuar 7s ease-in-out infinite;
+  --animate-flutuar-lento: flutuar 11s ease-in-out infinite;
+  --animate-girar-lento: girar-lento 46s linear infinite;
+  --animate-oscilar: oscilar 9s ease-in-out infinite;
+
+  @keyframes flutuar {
+    0%,
+    100% {
+      transform: translateY(0) rotate(var(--giro, 0deg));
+    }
+    50% {
+      transform: translateY(-10px) rotate(var(--giro, 0deg));
+    }
+  }
+
+  @keyframes girar-lento {
+    to {
+      rotate: 360deg;
+    }
+  }
+
+  @keyframes oscilar {
+    0%,
+    100% {
+      transform: rotate(var(--giro, 0deg)) translateY(0);
+    }
+    50% {
+      transform: rotate(calc(var(--giro, 0deg) + 2.5deg)) translateY(-5px);
+    }
+  }
+  /* Entrada curta para o que aparece do nada: confirmação e erro de envio. */
+  --animate-surgir: surgir 200ms cubic-bezier(0.23, 1, 0.32, 1);
+
+  @keyframes surgir {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes faixa {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-marca);
+    color: var(--color-tinta);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 0.92;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-destaque);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@utility xadrez {
+  background-image:
+    linear-gradient(45deg, var(--color-superficie) 25%, transparent 25%, transparent 75%, var(--color-superficie) 75%),
+    linear-gradient(45deg, var(--color-superficie) 25%, transparent 25%, transparent 75%, var(--color-superficie) 75%);
+  background-size: 22px 22px;
+  background-position: 0 0, 11px 11px;
+}
+
+@utility pontilhado {
+  background-image: radial-gradient(var(--color-superficie) 2.1px, transparent 2.2px);
+  background-size: 11px 11px;
+}
+
+/* medida de leitura confortável para textos corridos */
+@utility leitura {
+  max-width: 56ch;
+}
+
+/* parágrafo de apoio das seções: corpo maior, entrelinha folgada, medida curta */
+@utility apoio {
+  font-size: var(--text-apoio);
+  line-height: var(--text-apoio--line-height);
+  max-width: 56ch;
+}
+
+/*
+  Palco do hero: luz quente onde a foto do produto tem a própria fonte de luz,
+  mais vinheta nas bordas. É o que tira o recorte de cima de uma cor chapada.
+*/
+@utility palco-hero {
+  background:
+    radial-gradient(
+      120% 90% at 66% 44%,
+      rgb(255 190 120 / 0.3) 0%,
+      rgb(255 150 90 / 0.1) 32%,
+      rgb(0 0 0 / 0) 62%
+    ),
+    radial-gradient(140% 120% at 50% 50%, rgb(0 0 0 / 0) 45%, rgb(60 12 8 / 0.55) 100%),
+    var(--color-marca);
+}
+
+/* Sombra de contato: apoia o produto no chão em vez de deixá-lo boiando. */
+@utility chao-hero {
+  background: radial-gradient(
+    ellipse at center,
+    rgb(50 8 4 / 0.62) 0%,
+    rgb(50 8 4 / 0.28) 42%,
+    rgb(0 0 0 / 0) 72%
+  );
+  filter: blur(3px);
+}
+
+/*
+  Faixa que rola no dedo sem mostrar barra: a barra do sistema atravessava a
+  navegação compacta no celular e parecia um risco no meio do cabeçalho.
+*/
+@utility rolagem-discreta {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/*
+  Carrossel do celular: os itens de uma categoria correm na horizontal com
+  encaixe, para não obrigar o dedo a rolar 32 cards em coluna. Em tela maior
+  a mesma marcação volta a ser grade (ver o componente).
+*/
+@utility trilho {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 1.5rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  & > * {
+    scroll-snap-align: start;
+    flex: 0 0 78%;
+  }
+}
+
+/* recorte de cupom nas laterais do card de promoção */
+@utility cupom {
+  mask-image:
+    radial-gradient(circle 9px at 0 62%, transparent 98%, #000 100%),
+    radial-gradient(circle 9px at 100% 62%, transparent 98%, #000 100%);
+  mask-composite: intersect;
+  -webkit-mask-image:
+    radial-gradient(circle 9px at 0 62%, transparent 98%, #000 100%),
+    radial-gradient(circle 9px at 100% 62%, transparent 98%, #000 100%);
+  -webkit-mask-composite: source-in;
+}
