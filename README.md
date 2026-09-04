@@ -1,101 +1,149 @@
-# John´s Burgers
+<div align="center">
 
-<div align="left">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" height="40" alt="figma logo"  />
-  <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" height="40" alt="bootstrap logo"  />
-    <img width="12" />
+# John's Burgers
 
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" height="40" alt="html5 logo"  />
-  <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" height="40" alt="css3 logo"  />
-        <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="40" alt="javascript logo"  />
-    <img width="12" />
-  <img src="https://skillicons.dev/icons?i=vite" height="40" alt="vite logo"  />
-  <img width="12" />
-  <img src="https://skillicons.dev/icons?i=vercel" height="40" alt="vercel logo"  />
+**Landing de conversão + cardápio completo para hamburgueria.**
+Redesign integral e migração de HTML + Bootstrap + Vite para Next.js.
+
+![Next.js](https://img.shields.io/badge/Next.js-16-000?style=flat-square&logo=nextdotjs)
+![React](https://img.shields.io/badge/React-19-087ea4?style=flat-square&logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6?style=flat-square&logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-06b6d4?style=flat-square&logo=tailwindcss)
+
 </div>
 
-###
+![Home](./docs/prints/01-home-desktop.webp)
 
-<img src="./public/readme/burger-cover.png" alt="cover">
+## O que é
 
-> Página que criei com o tema de Hamburgueria usando BootStrap, framework CSS que me garantiu uma produção rápida e responsiva .
+Site de hamburgueria pensado para **fazer o cliente pedir**: o cardápio inteiro
+na primeira tela, pedido montado sem cadastro e a conversa terminando no
+WhatsApp. Serve como modelo para qualquer casa do ramo — cores, textos, fotos e
+preços saem todos de dois lugares (ver [Retematizar](#retematizar-para-outra-hamburgueria)).
 
-## 🚀 Instalando
+A versão original era uma página estática em Bootstrap. Desta ficou só o
+conteúdo; layout, identidade visual, arquitetura e fotos são novos.
 
-Windows:
+## Como está feito
 
-```
-git clone https://github.com/Joaommsp/johns-burger.git
-```
+| Camada     | Escolha                                             |
+| ---------- | --------------------------------------------------- |
+| Framework  | Next.js 16 (App Router, React 19, Server Components) |
+| Linguagem  | TypeScript, modo estrito                             |
+| Estilo     | Tailwind CSS 4 com tokens próprios em `@theme`       |
+| Tipografia | Anton · Archivo · Alfa Slab One                      |
+| Imagens    | `next/image`, WebP, recorte com fundo transparente   |
+| Deploy     | Vercel                                               |
 
-```
-cd johns-burger
-```
+Sem biblioteca de componentes, de animação ou de estado: o que existe é
+`react` e `next`.
 
-```
-npm i
-```
+## Telas
 
-```
-npm run dev
-```
+### Catálogo na home — 32 itens, 7 categorias
 
-## ✏️ Protótipo e Design
+![Catálogo](./docs/prints/02-catalogo-desktop.webp)
 
-<Mockup>Confira o design do projeto feito no Figma
+Cada item é um card com foto, descrição e preço. Hambúrgueres aparecem
+recortados sobre o creme; pratos, porções e bebidas vêm com mesa e balcão no
+quadro. O card sabe qual dos dois usar por um campo do próprio item.
 
-<a  href="https://www.figma.com/design/f8UsUmCg3jb6Yl81SQ12Q9/John%C2%B4s-burger?node-id=0-1&t=65A53hCkWf62Y7yl-1" >
-  <img src="./public/readme/Cover.png" alt="cover">
-</a>
+### Cardápio como ferramenta
 
-> Clique na imagem para ser encaminhado
+![Cardápio](./docs/prints/03-cardapio-desktop.webp)
 
-## 💻 Um pouco do projeto
+A rota `/cardapio` cumpre outro papel: busca, filtro por categoria e lista
+compacta, para quem já sabe o que quer.
 
-<img src="./public/readme/laptopWithMDPIScreen-1722715456313.jpeg" alt="hero">
+### Pedido sem cadastro
 
-<img src="./public/readme/laptopWithMDPIScreen-1722715513720.jpeg" alt="hero">
+![Pedido](./docs/prints/04-pedido-desktop.webp)
 
-<img src="./public/readme/laptopWithMDPIScreen-1722728483164.jpeg" alt="hero">
+O "Pedir" soma no painel lateral. No fim, a lista vira uma mensagem pronta no
+WhatsApp — sem checkout, sem login, sem banco de dados. Quem confirma é a
+cozinha.
 
-<img src="./public/readme/laptopWithMDPIScreen-1722719161773.jpeg" alt="hero">
+### No celular
 
-## 📱 Mockup
-
-<p>Pelo Figma desenvolvi este MockUp para complementar o projeto</p>
-
-<img src="./public/readme/mockup.png" alt="mockup">
-
-## 🔗 Deploy
-
-Clique e acesse o projeto
-
-<div align="left">
- <a href="https://johns-burger.vercel.app/"><img src="https://skillicons.dev/icons?i=vercel" height="40" alt="Vercel logo"  /></a>
+<div align="center">
+  <img src="./docs/prints/05-home-mobile.webp" width="30%" alt="Home no celular" />
+  <img src="./docs/prints/06-catalogo-mobile.webp" width="30%" alt="Catálogo no celular" />
+  <img src="./docs/prints/07-menu-mobile.webp" width="30%" alt="Menu no celular" />
 </div>
 
-## ⭐ Metas
+Menu recolhido, categorias em carrossel com encaixe (em vez de 32 cards em
+coluna) e alvos de toque de 44&nbsp;px. Auditado com Playwright: sem vazamento
+horizontal, sem texto abaixo de 11&nbsp;px.
 
-- [x] Uma página viva e elegante
-- [x] Design Responsivo
-- [x] Deploy no Vercel
-- [x] Utilização do BootStrap
+## Rodando
 
-## 🛠️ BootStrap
+```bash
+npm install
+npm run dev      # http://localhost:3000
+```
 
-<p>Para quem ainda não conhece , recomendo muito conhecer o Bootstrap, é fácil de aprender e usar. Ele oferece uma ampla gama de componentes prontos, como botões, formulários, e barras de navegação, que você pode simplesmente adicionar ao seu projeto sem escrever muito código.<p>
+Outros scripts: `npm run build`, `npm run lint`, `npm run typecheck`.
 
-## ⚠️ Única desvantagem
+Copie `.env.example` para `.env.local` e ajuste `NEXT_PUBLIC_SITE_URL` — ela
+alimenta canonical, Open Graph, sitemap e robots.
 
-<p>Os componentes padrão do Bootstrap são amplamente utilizados, o que pode fazer com que seu site tenha uma aparência genérica e similar a muitos outros sites. Personalizar os componentes para criar um design único pode exigir um esforço adicional.</p>
+## Estrutura
 
-Clique e acesse a documentação
+```
+src/
+  app/                 rotas (/ e /cardapio), layout, SEO e estilos globais
+  components/
+    ui/                primitivos: layout, botão, campo, tag, preço, ornamentos
+    layout/            cabeçalho, rodapé e menu do celular
+    home/              seções da página inicial
+    menu/              card, linha, foto e navegador do cardápio
+    order/             estado do pedido, painel e botões flutuantes
+    marketing/         vitrine do desenvolvedor
+  data/                casa, cardápio, promoções, navegação, galeria, SEO
+  hooks/               camada modal, montagem, horário de funcionamento
+  lib/                 tipos, formatadores, classes e dados estruturados
+  assets/images/       imagens importadas estaticamente
+```
 
-<div align="left">
- <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/"><img src="./public/readme/Bootstrap_logo.svg.png" height="40" alt="Vercel logo"  /></a>
-</div>
+Fronteiras: `app/` só compõe, `data/` não tem JSX, e `"use client"` fica
+restrito ao que realmente tem estado — pedido, busca, navegação e o sinal de
+aberto/fechado.
 
-## 🤓 Me acompanhe para mais projetos
+## Retematizar para outra hamburgueria
+
+1. **Cores, sombras e medidas** — bloco `@theme` em `src/app/globals.css`.
+   Trocar `--color-marca`, `--color-superficie` e `--color-destaque` muda a casa
+   inteira; nenhum componente tem cor literal.
+2. **Conteúdo** — `src/data/restaurant.ts` (nome, endereço, telefone, horário,
+   links), `src/data/menu.ts` (itens, preços, categorias) e
+   `src/data/promos.ts`. Nenhum preço ou telefone mora no JSX.
+
+O telefone existe uma vez só, em `telefoneE164`, e dele saem os links `tel:` e
+`wa.me`. Preço passa sempre por `formatarBRL`, em real por extenso — nunca
+abreviado. O "aberto agora" é calculado do horário da casa, não escrito na mão.
+
+## SEO
+
+`schema.org/Restaurant` em JSON-LD (endereço, horário, faixa de preço derivada
+do cardápio, seções do menu), metadata por rota com canonical próprio,
+`opengraph-image` gerada na identidade da casa, `sitemap.xml`, `robots.txt` e
+manifest.
+
+Não há `aggregateRating`: publicar nota e número de avaliações sem fonte real
+viola a política de rich results do Google.
+
+## Autor
+
+**João Marcos** — Frontend & UI/UX
+
+[Portfólio](https://softwaredeveloper-jmmsp.vercel.app/) ·
+[GitHub](https://github.com/Joaommsp) ·
+[LinkedIn](https://www.linkedin.com/in/joaomarcos10oficial/) ·
+[Behance](https://behance.net/joaomarcos10oficial) ·
+[Figma](https://figma.com/@joaomarcos19) ·
+[Instagram](https://instagram.com/joao.mmsp)
+
+## Licença
+
+Projeto de portfólio, sem fins comerciais. As fotos dos produtos foram geradas
+por IA; John's Burgers é um estabelecimento fictício.
